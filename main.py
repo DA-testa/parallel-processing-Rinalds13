@@ -1,31 +1,26 @@
 # python3
 
 def parallel_processing(n, m, data):
-    output = []
-    # TODO: write the function for simulating parallel tasks, 
-    # create the output pairs
-
-    return output
+    izvade = [(0, k) for k in range(n)]
+    rez = []
+    for t in data:
+        min_beigu_laiks = float('inf')
+        izvades_index = None
+        for k, (beigu_laiks, index) in enumerate(izvade):
+            if beigu_laiks < min_beigu_laiks:
+                min_beigu_laiks = beigu_laiks
+                izvades_index = k
+        rez.append((izvades_index, min_beigu_laiks))
+        izvade[izvades_index] = (min_beigu_laiks + t, izvades_index)
+    return rez
 
 def main():
-    # TODO: create input from keyboard
-    # input consists of two lines
-    # first line - n and m
-    # n - thread count 
-    # m - job count
-    n = 0
-    m = 0
-
-    # second line - data 
-    # data - contains m integers t(i) - the times in seconds it takes any thread to process i-th job
-    data = []
-
-    # TODO: create the function
-    result = parallel_processing(n,m,data)
+    n, m = map(int, input().split())
+    data = list(map(int, input().split()))
+    rez = parallel_processing(n, m, data)
     
-    # TODO: print out the results, each pair in it's own line
-
-
+    for k in range(m):
+        print(rez[k][0], rez[k][1])
 
 if __name__ == "__main__":
     main()
