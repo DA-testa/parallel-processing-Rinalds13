@@ -1,28 +1,26 @@
 # python3
-import heapq
 
 def parallel_processing(n, m, data):
-    izvade = []
-    brivie = [(0, i) for i in range(n)]
-    heapq.heapify(brivie)
-    beigu_laiks = [0] * m
-    for i in range(m):
-        t_sakuma_laiks, index = heapq.heappop(brivie)
-        darba_ilgums = data[i]
-        sakuma_laiks = min(t_sakuma_laiks, beigu_laiks[i-1])
-        beigu_laiks = sakuma_laiks + darba_ilgums
-        izvade.append((index, sakuma_laiks))
-        beigu_laiks[i] = beigu_laiks
-        heapq.heappush(brivie, (beigu_laiks, index))
-    return izvade
-
+    izvade = [(0, k) for k in range(n)]
+    rez = []
+    for t in data:
+        min_beigu_laiks = float('inf')
+        izvades_index = None
+        for k, (beigu_laiks, index) in enumerate(izvade):
+            if beigu_laiks < min_beigu_laiks:
+                min_beigu_laiks = beigu_laiks
+                izvades_index = k
+        rez.append((izvades_index, min_beigu_laiks))
+        izvade[izvades_index] = (min_beigu_laiks + t, izvades_index)
+    return rez
 
 def main():
     n, m = map(int, input().split())
-    dati = list(map(int, input().split()))
-    rezultati = parallel_processing(n, m, dati)
-    for index, sakuma_laiks in rezultati:
-        print(index, sakuma_laiks)
+    data = list(map(int, input().split()))
+    rez = parallel_processing(n, m, data)
+    
+    for k in range(m):
+        print(rez[k][0], rez[k][1])
 
 if __name__ == "__main__":
     main()
