@@ -9,7 +9,7 @@ def parallel_processing(n, m, data):
     for i in range(m):
         t_sakuma_laiks, index = heapq.heappop(brivie)
         darba_ilgums = data[i]
-        sakuma_laiks = max(t_sakuma_laiks, beigu_laiks[i-1])
+        sakuma_laiks = min(t_sakuma_laiks, beigu_laiks[i-1])
         beigu_laiks = sakuma_laiks + darba_ilgums
         izvade.append((index, sakuma_laiks))
         beigu_laiks[i] = beigu_laiks
