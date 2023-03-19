@@ -18,7 +18,7 @@ def parallel_processing(n, m, data):
 
 
 def main():
-    n m = map(int, input().split())
+    n, m = map(int, input().split())
     dati = list(map(int, input().split()))
     rezultati = parallel_processing(n, m, dati)
     for index, sakuma_laiks in rezultati:
