@@ -3,9 +3,9 @@ import heapq
 
 def parallel_processing(n, m, data):
     izvade = []
-    brivie = [(1, i) for i in range(n)]
+    brivie = [(0, i) for i in range(n)]
     heapq.heapify(brivie)
-    beigu_laiks = [1] * m
+    beigu_laiks = [0] * m
     for i in range(m):
         t_sakuma_laiks, index = heapq.heappop(brivie)
         darba_ilgums = data[i]
